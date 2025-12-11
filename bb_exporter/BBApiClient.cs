@@ -59,6 +59,9 @@ namespace bb_exporter
             {
                 res = res.Replace(_COMMITTEDAD_BUG, _COMMITTEDAD_PATCH);
             }
+            
+            Console.WriteLine(res);
+            
             //
             return JsonConvert.DeserializeObject<List<T>>(res).FirstOrDefault();
         }

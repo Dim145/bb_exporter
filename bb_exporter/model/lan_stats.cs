@@ -14,17 +14,17 @@ namespace bb_exporter.model.lan
     public class Rx
     {
         public long bytes { get; set; }
-        public int packets { get; set; }
-        public int packetserrors { get; set; }
-        public int packetsdiscards { get; set; }
+        public long packets { get; set; }
+        public long packetserrors { get; set; }
+        public long packetsdiscards { get; set; }
     }
 
     public class Tx
     {
         public long bytes { get; set; }
-        public int packets { get; set; }
-        public int packetserrors { get; set; }
-        public int packetsdiscards { get; set; }
+        public long packets { get; set; }
+        public long packetserrors { get; set; }
+        public long packetsdiscards { get; set; }
     }
 
     public class Stats

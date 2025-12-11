@@ -65,14 +65,16 @@ class Program
             // Set gauges values
 
             Console.WriteLine("Setting custom counters values...");
+            Console.WriteLine(JsonConvert.SerializeObject(device_cpu, Formatting.Indented));
 
             // CPU
-            _bb_device_cpu_total.Set(device_cpu.device.time.total);
-            _bb_device_cpu_user.Set(device_cpu.device.time.user);
-            _bb_device_cpu_system.Set(device_cpu.device.time.system);
-            _bb_device_cpu_idle.Set(device_cpu.device.time.idle);
+            _bb_device_cpu_total.Set(device_cpu.device.cpu.time.total);
+            _bb_device_cpu_user.Set(device_cpu.device.cpu.time.user);
+            _bb_device_cpu_system.Set(device_cpu.device.cpu.time.system);
+            _bb_device_cpu_idle.Set(device_cpu.device.cpu.time.idle);
 
             // Memory
+            Console.WriteLine(JsonConvert.SerializeObject(device_mem, Formatting.Indented));
             _bb_device_mem_total.Set(device_mem.device.mem.total);
             _bb_device_mem_free.Set(device_mem.device.mem.free);
 
@@ -80,14 +82,17 @@ class Program
 
 
             // Wan
+            Console.WriteLine(JsonConvert.SerializeObject(wan_ip_stats, Formatting.Indented));
             _bb_wan_ip_stats_rx_bytes.Set(wan_ip_stats.wan.ip.stats.rx.bytes);
             _bb_wan_ip_stats_tx_bytes.Set(wan_ip_stats.wan.ip.stats.tx.bytes);
 
             // Lan
+            Console.WriteLine(JsonConvert.SerializeObject(wan_ip_stats, Formatting.Indented));
             _bb_lan_stats_rx_bytes.Set(lan_stats.lan.stats.rx.bytes);
             _bb_lan_stats_tx_bytes.Set(lan_stats.lan.stats.tx.bytes);
 
             // Wireless
+            Console.WriteLine(JsonConvert.SerializeObject(wireless_24_stats, Formatting.Indented));
             _bb_wireless_24_stats_rx_bytes.Set(wireless_24_stats.wireless.ssid.stats.rx.bytes);
             _bb_wireless_24_stats_tx_bytes.Set(wireless_24_stats.wireless.ssid.stats.tx.bytes);
             _bb_wireless_5_stats_rx_bytes.Set(wireless_5_stats.wireless.ssid.stats.rx.bytes);
@@ -105,11 +110,17 @@ class Program
     {
         try
         {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                Converters = { new LongToStringConverter() }
+            };
+            
             Console.WriteLine("Starting bb_exporter...");
             Console.WriteLine("Reading settings file...");
 
             var builder = new ConfigurationBuilder()
-               .AddJsonFile($"appsettings.json", true, true);
+                .AddJsonFile($"appsettings.json", true, true)
+                .AddEnvironmentVariables();
             var config = builder.Build();
 
             APIURL = config["BBoxAPIURL"];

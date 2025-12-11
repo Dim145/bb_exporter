@@ -13,8 +13,13 @@ namespace bb_exporter.model.cpu
 
     public class Device
     {
-        public Time time { get; set; }
+        public Cpu cpu { get; set; }
         public Process process { get; set; }
+    }
+
+    public class Cpu
+    {
+        public Time time { get; set; }
     }
 
     public class Time

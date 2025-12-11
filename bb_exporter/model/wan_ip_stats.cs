@@ -29,23 +29,23 @@ namespace bb_exporter.model.wan
 
     public class Rx
     {
-        public int packets { get; set; }
+        public long packets { get; set; }
         public long bytes { get; set; }
-        public int packetserrors { get; set; }
-        public int packetsdiscards { get; set; }
+        public long packetserrors { get; set; }
+        public long packetsdiscards { get; set; }
         public float occupation { get; set; }
-        public int bandwidth { get; set; }
-        public int maxBandwidth { get; set; }
+        public long bandwidth { get; set; }
+        public long maxBandwidth { get; set; }
     }
 
     public class Tx
     {
-        public int packets { get; set; }
+        public long packets { get; set; }
         public long bytes { get; set; }
-        public int packetserrors { get; set; }
-        public int packetsdiscards { get; set; }
+        public long packetserrors { get; set; }
+        public long packetsdiscards { get; set; }
         public float occupation { get; set; }
-        public int bandwidth { get; set; }
-        public int maxBandwidth { get; set; }
+        public long bandwidth { get; set; }
+        public long maxBandwidth { get; set; }
     }
 }

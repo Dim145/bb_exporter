@@ -1,0 +1,15 @@
+﻿services:
+  bb_exporter:
+    image: bb_exporter
+    container_name: bb_exporter
+    build:
+      context: .
+      dockerfile: bb_exporter/Dockerfile
+    environment:
+      BBoxAPIURL: https://mabbox.bytel.fr
+      BBoxPassword: "MYPASS"
+      BBoxAPIRefreshTime: 60
+      MetricsServerListeningPort: 9100
+    ports:
+      - "9100:9100"
+
